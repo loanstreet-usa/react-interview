@@ -19,8 +19,8 @@ class DealsList extends Component {
   }
 
   render() {
-    const { deals } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
+    const { deals, removeDeal, publishDeal } = this.props;
+    const dealsTableRows = deals.map(deal => <DealsTableRow removeDeal={removeDeal} publishDeal={publishDeal} key={deal.id} deal={deal} />);
     return(
       <div>
         <table className="DealsTable">

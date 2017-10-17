@@ -13,18 +13,27 @@ class DealsTableRow extends Component {
       institution: PropTypes.string.isRequired,
       dealType: PropTypes.string.isRequired,
       dealSize: PropTypes.string.isRequired,
-      isPublished: PropTypes.bool.isRequired
+      isPublished: PropTypes.bool.isRequired,
+        removeDeal: PropTypes.func.isRequired,
     }).isRequired
   }
 
+
+
   render() {
-    const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
+    const { deal, removeDeal, publishDeal } = this.props;
     return (
       <tr className="DealsTableRow">
-        <td className="DealsTableRow--cell">{institution}</td>
-        <td className="DealsTableRow--cell">{dealType}</td>
-        <td className="DealsTableRow--cell">{currencyAmountToString(dealSize)}</td>
-        <td className="DealsTableRow--cell">{isPublished ? 'Yes' : 'No'}</td>
+        <td className="DealsTableRow--cell">{deal.institution}</td>
+        <td className="DealsTableRow--cell">{deal.dealType}</td>
+        <td className="DealsTableRow--cell">{currencyAmountToString(deal.dealSize)}</td>
+        <td className="DealsTableRow--cell">{deal.isPublished ? 'Yes' : 'No'}</td>
+          <td className="DealsTableRow--cell">
+              <button onClick={()=>{removeDeal(deal)}}>Remove</button>
+          </td>
+          <td className="DealsTableRow--cell">
+              <button onClick={()=>{publishDeal(deal)}}  disabled={deal.isPublished}>Publish</button>
+          </td>
       </tr>
     )
   }
