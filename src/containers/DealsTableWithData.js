@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import DealsTable from '../components/DealsTable';
 
 const mapStateToProps = state => {
-  const { deals } = state;
+  const { deals, error } = state;
   return {
-    deals
+    deals,
+    error
   };
 };
 

@@ -14,7 +14,8 @@ const DEFAULT_DEAL = {
 
 class DealForm extends Component {
   static propTypes = {
-    onCreateDeal: PropTypes.func
+    onCreateDeal: PropTypes.func,
+    error: PropTypes.string
   }
 
   static defaultProps = {
@@ -40,6 +41,7 @@ class DealForm extends Component {
   render() {
     return (
       <form className="NewDealForm">
+        <span className="Error">{this.props.error}</span>
         <div className="NewDealForm--div">
           <label className="NewDealForm--label">Institution:
             <input

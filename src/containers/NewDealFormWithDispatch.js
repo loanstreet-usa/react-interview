@@ -8,4 +8,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(NewDealForm);
+const mapStateToProps = state => {
+  const { error } = state;
+  return {
+    error
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewDealForm);

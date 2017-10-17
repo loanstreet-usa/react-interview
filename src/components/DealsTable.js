@@ -30,6 +30,7 @@ class DealsList extends Component {
               <th className="DealsTable--headerCell">Deal Type</th>
               <th className="DealsTable--headerCell">Deal Size</th>
               <th className="DealsTable--headerCell">Is Published?</th>
+              <th className="DealsTable--headerCell">Actions</th>
             </tr>
           </thead>
           <tbody>
