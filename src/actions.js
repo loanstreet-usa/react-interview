@@ -20,10 +20,11 @@ export function deleteDeal(key) {
   }
 }
 
-export function sortDeals(sortorder, sortname) {
+export function sortDeals(sorttype, sortorder, sortname) {
   return {
     type: SORT_DEALS,
     payload: {
+      sorttype,
       sortorder,
       sortname
     }

@@ -23,17 +23,23 @@ const initialState = {
 };
 
 const getDealSortCompare = (sorttype, sortorder, sortname) => {
-  if (sorttype === "number") {
+  if (sorttype === "string") {
     if (sortorder === "asc" || !sortorder) {
       return ( a, b ) => a[sortname].localeCompare(b[sortname]);
     } else {
       return ( a, b ) => b[sortname].localeCompare(a[sortname]);
     }
+  } else if (sorttype === "float"){
+    if (sortorder === "asc" || !sortorder) {
+      return ( a, b ) => parseFloat(a[sortname]) > parseFloat(b[sortname])
+    } else {
+      return ( a, b ) => parseFloat(a[sortname]) < parseFloat(b[sortname])
+    }
   } else {
     if (sortorder === "asc" || !sortorder) {
-      return ( a, b ) => parseFloat(a[sortname]) - parseFloat(b[sortname])
+      return ( a, b ) => a > b
     } else {
-      return ( a, b ) => parseFloat(b[sortname]) - parseFloat(a[sortname])
+      return ( a, b ) => a < b
     }
   }
 }
@@ -57,10 +63,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, deals: state.deals.filter( deal => deal.id !== payload.key ) }
     case SORT_DEALS:
       const { sorttype, sortorder, sortname } = payload
-      let compare = getDealSortCompare(sorttype, sortorder, sortname)
-      const myDeals = state.deals.sort(compare)
-      console.log(myDeals);
-      return { ...state, myDeals }
+      const compare = getDealSortCompare(sorttype, sortorder, sortname)
+      return { ...state, deals: [...state.deals].sort(compare) };
 
     default:
       return state;
