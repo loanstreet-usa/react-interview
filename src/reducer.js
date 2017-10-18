@@ -1,4 +1,4 @@
-import { CREATE_DEAL, DELETE_DEAL } from './actions';
+import { CREATE_DEAL, DELETE_DEAL, SORT_DEALS } from './actions';
 
 var nextDealId = 3;
 
@@ -22,6 +22,22 @@ const initialState = {
   error: ""
 };
 
+const getDealSortCompare = (sorttype, sortorder, sortname) => {
+  if (sorttype === "number") {
+    if (sortorder === "asc" || !sortorder) {
+      return ( a, b ) => a[sortname].localeCompare(b[sortname]);
+    } else {
+      return ( a, b ) => b[sortname].localeCompare(a[sortname]);
+    }
+  } else {
+    if (sortorder === "asc" || !sortorder) {
+      return ( a, b ) => parseFloat(a[sortname]) - parseFloat(b[sortname])
+    } else {
+      return ( a, b ) => parseFloat(b[sortname]) - parseFloat(a[sortname])
+    }
+  }
+}
+
 export default (state = initialState, { type, payload }) => {
   switch(type) {
     case CREATE_DEAL:
@@ -39,6 +55,13 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, deals: [ ...state.deals, { ...newDeal, id: nextDealId++ } ], error: error };
     case DELETE_DEAL:
       return { ...state, deals: state.deals.filter( deal => deal.id !== payload.key ) }
+    case SORT_DEALS:
+      const { sorttype, sortorder, sortname } = payload
+      let compare = getDealSortCompare(sorttype, sortorder, sortname)
+      const myDeals = state.deals.sort(compare)
+      console.log(myDeals);
+      return { ...state, myDeals }
+
     default:
       return state;
   }

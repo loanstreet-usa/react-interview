@@ -1,5 +1,3 @@
-import { connect } from 'react-redux';
-import { deleteDeal } from '../actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
@@ -9,12 +7,6 @@ import './DealsTableRow.css';
 function currencyAmountToString(amount) {
   return "$" + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onDeleteDeal: id => dispatch(deleteDeal(id))
-  };
-};
 
 class DealsTableRow extends Component {
   static propTypes = {
@@ -40,7 +32,6 @@ class DealsTableRow extends Component {
 
   render() {
     const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
-    console.log(this.props)
     return (
       <tr className="DealsTableRow">
         <td className="DealsTableRow--cell">{institution}</td>
@@ -53,4 +44,4 @@ class DealsTableRow extends Component {
   }
 }
 
-export default connect(undefined, mapDispatchToProps)(DealsTableRow);
+export default DealsTableRow;

@@ -1,5 +1,6 @@
 export const CREATE_DEAL = 'CREATE_DEAL';
 export const DELETE_DEAL = 'DELETE_DEAL';
+export const SORT_DEALS = 'SORT_DEALS';
 
 export function createDeal(deal) {
   return {
@@ -15,6 +16,16 @@ export function deleteDeal(key) {
     type: DELETE_DEAL,
     payload: {
       key
+    }
+  }
+}
+
+export function sortDeals(sortorder, sortname) {
+  return {
+    type: SORT_DEALS,
+    payload: {
+      sortorder,
+      sortname
     }
   }
 }
