@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
 
 import DealsTableRow from './DealsTableRow';
+import DealsTableHeaderCell from './DealsTableHeaderCell';
 
 import './DealsTable.css';
 
-class DealsList extends Component {
+class DealsTable extends Component {
   static propTypes = {
     deals: PropTypes.arrayOf(
       PropTypes.shape({
@@ -25,27 +26,21 @@ class DealsList extends Component {
     onSortDeals: noop
   }
 
-  sortDeals = e => {
-    e.preventDefault();
-    const { sorttype, sortorder, sortname } = e.target.dataset;
-    if (this.props.onSortDeals)
-      this.props.onSortDeals(sorttype, sortorder, sortname)
-  }
-
   render() {
-    const { deals, onDeleteDeal } = this.props;
+    const { deals, onDeleteDeal, onSortDeals } = this.props;
     const dealsTableRows = deals.map(deal => <DealsTableRow onDeleteDeal={onDeleteDeal} key={deal.id} deal={deal} />);
     return(
       <div>
         <table className="DealsTable">
           <thead>
             <tr>
-              {/* TODO: Move this to sub components */}
-              <th className="DealsTable--headerCell" data-sorttype="string" data-sortorder="" data-sortname="institution" onClick={this.sortDeals}>Institution</th>
+              <DealsTableHeaderCell sortType="string" sortOrder="" sortName="institution" onSortDeals={onSortDeals} label="Institution" />
+              {/*
               <th className="DealsTable--headerCell" data-sorttype="string" data-sortorder="" data-sortname="dealType" onClick={this.sortDeals}>Deal Type</th>
               <th className="DealsTable--headerCell" data-sorttype="float" data-sortorder="" data-sortname="dealSize" onClick={this.sortDeals}>Deal Size</th>
               <th className="DealsTable--headerCell" data-sorttype="boolean" data-sortorder="" data-sortname="isPublished" onClick={this.sortDeals}>Is Published?</th>
               <th className="DealsTable--headerCell">Actions</th>
+              */}
             </tr>
           </thead>
           <tbody>
@@ -57,4 +52,4 @@ class DealsList extends Component {
   }
 }
 
-export default DealsList;
+export default DealsTable;
