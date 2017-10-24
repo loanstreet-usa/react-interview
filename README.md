@@ -1,6 +1,7 @@
 # CW comments
 - take home test
 - did not have Redux experience at start
+- I may have screwed up his README?!  Or not.  Seemed like he committed it with a bunch of merge conflicts in README?
 
 # Setup
 
