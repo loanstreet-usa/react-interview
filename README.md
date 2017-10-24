@@ -1,3 +1,7 @@
+# CW comments
+- take home test
+- did not have Redux experience at start
+
 # Setup
 
 Fork the repo and clone locally
