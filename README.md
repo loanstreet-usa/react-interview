@@ -1,3 +1,8 @@
+# CW comments on code test
+- Done in person
+- 1.5 hours
+- helped with answer 3. He was using state.deals.splice() which I believe mutates in place the state.
+
 # Setup
 
 Fork the repo and clone locally
