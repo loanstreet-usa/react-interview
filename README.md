@@ -21,7 +21,19 @@ To start a local server run the command `yarn start` in the root directory of th
 * `NewDealForm` will rerender some of its children unnecessarily.  Why? 
 What is the generally recommended solution?
 
+<<<<<<< HEAD
+- Developing a shouldComponentUpdate method or creating different components for its children
+
+* How would you hook this frontend to a backend (vs storing the data locally in the store only).  How would you load initial data?
+
+- Saving in a database or in localStorage
+
+* What other suggestions can you make to improve the quality of the code?
+
+- Doing some testing
+=======
 * How would you hook this frontend to a backend (vs storing the data locally in the store only).  How would you load initial data?
 
 * What other suggestions can you make to improve the quality of the code?
 
+>>>>>>> b2c0745f0e1a102fe0d6ce30a5b0373af1a8fcd2
