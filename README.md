@@ -1,4 +1,10 @@
-# Install and Run
+# CW comments
+- take home test
+- did not have Redux experience at start
+
+# Setup
+
+Fork the repo and clone locally
 
 You need npm and yarn installed (`brew install npm` and `brew install yarn`).
 
