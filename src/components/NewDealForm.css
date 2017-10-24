@@ -26,3 +26,14 @@
   margin-top: 10px;
   width: 300px;
 }
+
+.NewDealForm--noerror{
+  width:100%;
+  min-height: 30px
+}
+
+.NewDealForm--error{
+  background-color: red;
+  width:100%;
+  min-height: 30px
+}

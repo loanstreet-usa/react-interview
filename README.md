@@ -19,9 +19,10 @@ To start a local server run the command `yarn start` in the root directory of th
 # Questions
 
 * `NewDealForm` will rerender some of its children unnecessarily.  Why? 
-What is the generally recommended solution?
+- What is the generally recommended solution?
 
 * How would you hook this frontend to a backend (vs storing the data locally in the store only).  How would you load initial data?
+- Saving in a database or in localStorage
 
 * What other suggestions can you make to improve the quality of the code?
-
+- Doing some testing

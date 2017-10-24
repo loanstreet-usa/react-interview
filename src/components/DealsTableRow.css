@@ -48,6 +48,19 @@
   border-right: 1px solid #C1C3D1;
 }
 
+.NewDealForm--button {
+  display: block ;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 130px;
+  min-width: 130px;
+}
+
+.Cell-button{
+  max-width: 170px;
+  min-width: 170px;
+}
+
 .DealsTableRow--cell:last-child {
   border-right: 0px;
 }
