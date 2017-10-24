@@ -22,23 +22,42 @@ class DealForm extends Component {
   }
 
   // State represents a deal.
-  state = { ...DEFAULT_DEAL };
+  state = { ...DEFAULT_DEAL, error: null };
 
   propertyUpdater(property) {
     return e => this.setState({[property]: e.target.value});
   }
 
-  createDeal = e => {
-    e.preventDefault();
+  createDeal = () => {
     if (this.props.onCreateDeal)
       this.props.onCreateDeal({ ...this.state });
 
     // Reset state for the next deal input.
     this.setState({ ...DEFAULT_DEAL });
   }
-
+  handleClick = e => {
+    e.preventDefault();
+    if (!this.state.institution || !this.state.dealType || !this.state.dealSize) {
+      this.setState({error: 'Missing Field.'});
+      return;
+    }
+    if (this.state.institution.match(/\W/)){
+      this.setState({error: 'Institution must be a string.'});
+      return;
+    }
+    if (this.state.dealType.match(/\W/)){
+      this.setState({error: 'Deal Type must be a string.'});
+      return;
+    }
+    if (this.state.dealSize.match(/\D/)) {
+      this.setState({error: 'Deal Size must be an integer.'});
+      return;
+    }
+    this.createDeal();
+  }
   render() {
     return (
+      <div>
       <form className="NewDealForm">
         <div className="NewDealForm--div">
           <label className="NewDealForm--label">Institution:
@@ -76,8 +95,16 @@ class DealForm extends Component {
             />
           </label>
         </div>
-        <button className="NewDealForm--button" onClick={this.createDeal}>Create Deal</button>
+        <button
+          className="NewDealForm--button"
+          onClick={this.handleClick}>
+          Create Deal
+        </button>
       </form>
+      <div>{
+        (this.state.error) ? this.state.error : ''
+      }</div>
+    </div>
     );
   }
 };

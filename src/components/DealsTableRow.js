@@ -16,7 +16,13 @@ class DealsTableRow extends Component {
       isPublished: PropTypes.bool.isRequired
     }).isRequired
   }
+  handleClickRemove = (e) => {
+    this.props.onDeleteDeal(this.props.deal.id);
 
+  }
+  handleClickPublish = (e) => {
+    this.props.onPublishDeal(this.props.deal.id);
+  }
   render() {
     const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
     return (
@@ -24,7 +30,8 @@ class DealsTableRow extends Component {
         <td className="DealsTableRow--cell">{institution}</td>
         <td className="DealsTableRow--cell">{dealType}</td>
         <td className="DealsTableRow--cell">{currencyAmountToString(dealSize)}</td>
-        <td className="DealsTableRow--cell">{isPublished ? 'Yes' : 'No'}</td>
+        <td className="DealsTableRow--cell" onClick={this.handleClickPublish}>{isPublished ? 'Yes' : 'No'}</td>
+        <td className="DealsTableRow--cell" onClick={this.handleClickRemove}>Delete</td>
       </tr>
     )
   }

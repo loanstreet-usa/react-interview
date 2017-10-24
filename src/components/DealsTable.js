@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import DealsTableRow from './DealsTableRow';
+import DealsTableRow from '../containers/DealsTableRowWithDispatch';
 
 import './DealsTable.css';
 
@@ -17,12 +17,15 @@ class DealsList extends Component {
       })
     ).isRequired
   }
+  handleClickSort = (event) => {
+    this.props.onSortDeals(this.props.deals);
+  }
 
   render() {
     const { deals } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
+    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} deals={deals} />);
     return(
-      <div>
+      <div onClick={this.handleClickSort}>
         <table className="DealsTable">
           <thead>
             <tr>
@@ -30,6 +33,7 @@ class DealsList extends Component {
               <th className="DealsTable--headerCell">Deal Type</th>
               <th className="DealsTable--headerCell">Deal Size</th>
               <th className="DealsTable--headerCell">Is Published?</th>
+              <th className="DealsTable--headerCell"></th>
             </tr>
           </thead>
           <tbody>
