@@ -51,3 +51,25 @@
 .DealsTableRow--cell:last-child {
   border-right: 0px;
 }
+
+.removeDeal {
+  color: white;
+  padding: 5px;
+  background-color: red;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px grey;
+}
+
+.publishDeal {
+  color: white;
+  float: right;
+  background-color: green;
+  box-shadow: 1px 1px 1px grey;
+  padding: 5px 8px;
+  border-radius: 20px;
+  cursor: pointer;
+}

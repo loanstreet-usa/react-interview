@@ -22,19 +22,43 @@ class DealForm extends Component {
   }
 
   // State represents a deal.
-  state = { ...DEFAULT_DEAL };
+  state = {  ...DEFAULT_DEAL, errors: { ...DEFAULT_DEAL } };
 
   propertyUpdater(property) {
-    return e => this.setState({[property]: e.target.value});
+    return e => this.setState({ [property]: property == 'dealSize' ? e.target.value.replace(/[^\d]/g, '') : e.target.value });
   }
 
   createDeal = e => {
     e.preventDefault();
-    if (this.props.onCreateDeal)
+    if (this.props.onCreateDeal && this.validateDeal().isValid){
       this.props.onCreateDeal({ ...this.state });
 
-    // Reset state for the next deal input.
-    this.setState({ ...DEFAULT_DEAL });
+      // Reset state for the next deal input.
+      this.setState({ ...DEFAULT_DEAL, errors: { ...DEFAULT_DEAL } });
+    }
+  }
+
+  validateDeal = (deal = this.state) => {
+    for (var field in deal){
+      if (!['isPublished', 'errors'].includes(field)){
+        if (!deal[field]){
+          this.setState({ errors: { ...this.state.errors, [field]: 'Must enter a value.' } });
+          this.refs[field].focus();
+          return { field };
+        }
+        if (['institution', 'dealType'].includes(field)){
+          //
+        }
+        else if (field == 'dealSize'){
+          if (!deal[field].replace(/[^\d]/g, '')){
+            this.setState({ errors: { ...this.state.errors, [field]: 'Must enter a number.' } });
+            this.refs[field].focus();
+            return { field };
+          }
+        }
+      }
+    }
+    return { isValid: true };
   }
 
   render() {
@@ -50,6 +74,7 @@ class DealForm extends Component {
               onChange={this.propertyUpdater('institution')}
               required
             />
+            { this.state.errors.institution && <div className='error'>{this.state.errors.institution}</div> }
           </label>
         </div>
         <div>
@@ -62,6 +87,7 @@ class DealForm extends Component {
               onChange={this.propertyUpdater('dealType')}
               required
             />
+            { this.state.errors.dealType && <div className='error'>{this.state.errors.dealType}</div> }
           </label>
         </div>
         <div>
@@ -74,6 +100,7 @@ class DealForm extends Component {
               onChange={this.propertyUpdater('dealSize')}
               required
             />
+            { this.state.errors.dealSize && <div className='error'>{this.state.errors.dealSize}</div> }
           </label>
         </div>
         <button className="NewDealForm--button" onClick={this.createDeal}>Create Deal</button>

@@ -1,4 +1,4 @@
-import { CREATE_DEAL } from './actions';
+import { CREATE_DEAL, DELETE_DEAL, PUBLISH_DEAL } from './actions';
 
 var nextDealId = 3;
 
@@ -25,6 +25,12 @@ export default (state = initialState, { type, payload }) => {
   switch(type) {
     case CREATE_DEAL:
       return { ...state, deals: [ ...state.deals, { ...payload.deal, id: nextDealId++ } ] };
+    case DELETE_DEAL:
+      return { ...state, deals: state.deals.filter(deal => deal.id != payload.id) };
+    case PUBLISH_DEAL:
+      let newDeals = [ ...state.deals ];
+      newDeals.splice(state.deals.findIndex(deal => deal.id == payload.deal.id), 1, payload.deal)
+      return { ...state, deals: newDeals };
     default:
       return state;
   }
