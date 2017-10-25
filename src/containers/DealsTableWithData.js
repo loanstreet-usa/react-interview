@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { sortDeals } from '../actions';
 import DealsTable from '../components/DealsTable';
 
 const mapStateToProps = state => {
@@ -8,4 +9,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(DealsTable);
+const mapDispatchToProps = dispatch => {
+  return {
+    sortDeals: sortCriteria => dispatch(sortDeals(sortCriteria))
+  };
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DealsTable);

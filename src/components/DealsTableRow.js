@@ -25,6 +25,7 @@ class DealsTableRow extends Component {
         <td className="DealsTableRow--cell">{dealType}</td>
         <td className="DealsTableRow--cell">{currencyAmountToString(dealSize)}</td>
         <td className="DealsTableRow--cell">{isPublished ? 'Yes' : 'No'}</td>
+        <td className="DealsTableRow--cell">X</td>
       </tr>
     )
   }

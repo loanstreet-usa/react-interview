@@ -26,3 +26,9 @@
   margin-top: 10px;
   width: 300px;
 }
+
+#ErrorMsgArea {
+  text-align: left;
+  color: red;
+  list-style: none;
+}

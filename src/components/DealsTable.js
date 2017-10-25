@@ -18,6 +18,12 @@ class DealsList extends Component {
     ).isRequired
   }
 
+  sortDeals = e => {
+    e.preventDefault();
+    const sortCriteria = e.target.firstChild.nodeValue;
+    this.props.sortDeals(sortCriteria);
+  }
+
   render() {
     const { deals } = this.props;
     const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
@@ -26,10 +32,11 @@ class DealsList extends Component {
         <table className="DealsTable">
           <thead>
             <tr>
-              <th className="DealsTable--headerCell">Institution</th>
-              <th className="DealsTable--headerCell">Deal Type</th>
-              <th className="DealsTable--headerCell">Deal Size</th>
-              <th className="DealsTable--headerCell">Is Published?</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Institution</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Deal Type</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Deal Size</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Is Published?</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Remove Deal</th>
             </tr>
           </thead>
           <tbody>
