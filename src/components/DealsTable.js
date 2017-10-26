@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import DealsTableRow from './DealsTableRow';
+import SelectionScreenWithDispatch from '../containers/SelectionScreenWithDispatch';
 
 import './DealsTable.css';
 
@@ -19,14 +20,13 @@ class DealsList extends Component {
   }
 
   sortDeals = e => {
-    e.preventDefault();
     const sortCriteria = e.target.firstChild.nodeValue;
-    this.props.sortDeals(sortCriteria);
+    this.props.onSortDeals(sortCriteria);
   }
 
   render() {
-    const { deals } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
+    const { deals, onSelectDeal } = this.props;
+    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} onSelectDeal={onSelectDeal}/>);
     return(
       <div>
         <table className="DealsTable">
@@ -36,13 +36,14 @@ class DealsList extends Component {
               <th className="DealsTable--headerCell" onClick={this.sortDeals}>Deal Type</th>
               <th className="DealsTable--headerCell" onClick={this.sortDeals}>Deal Size</th>
               <th className="DealsTable--headerCell" onClick={this.sortDeals}>Is Published?</th>
-              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Remove Deal</th>
+              <th className="DealsTable--headerCell">Remove Deal</th>
             </tr>
           </thead>
           <tbody>
             {dealsTableRows}
           </tbody>
         </table>
+        {(this.props.selectionReason !== '') && <SelectionScreenWithDispatch />}
       </div>
     );
   }

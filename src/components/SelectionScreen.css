@@ -1,0 +1,46 @@
+
+.SelectionScreen {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  border-top: 1px solid #C1C3D1;
+  margin: auto;
+  padding: 5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.SelectionReason {
+  width: 100%;
+}
+
+.SelectionBtnArea {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.SelectionBtn {
+  padding: 20px 40px;
+  display: inline;
+  color: #666B85;
+  font-size: 16px;
+  font-weight: normal;
+  border: 1px solid #C1C3D1;
+  cursor: pointer;
+
+}
+
+#ConfirmBtn:hover {
+  background-color: #3cd80d;
+  color: white;
+}
+
+#CancelBtn:hover {
+  background-color: #FF1212;
+  color: white;
+}

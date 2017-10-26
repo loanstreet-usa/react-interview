@@ -17,6 +17,16 @@ class DealsTableRow extends Component {
     }).isRequired
   }
 
+  markForRemoval = e => {
+    this.props.onSelectDeal(this.props.deal, 'remove');
+  }
+
+  markForPublication = e => {
+    if (!this.props.deal.isPublished) {
+      this.props.onSelectDeal(this.props.deal, 'publish');
+    }
+  }
+
   render() {
     const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
     return (
@@ -24,8 +34,8 @@ class DealsTableRow extends Component {
         <td className="DealsTableRow--cell">{institution}</td>
         <td className="DealsTableRow--cell">{dealType}</td>
         <td className="DealsTableRow--cell">{currencyAmountToString(dealSize)}</td>
-        <td className="DealsTableRow--cell">{isPublished ? 'Yes' : 'No'}</td>
-        <td className="DealsTableRow--cell">X</td>
+        <td className="DealsTableRow--cell DealsTableRow--publishBtn" onClick={this.markForPublication}>{isPublished ? 'Yes' : 'No'}</td>
+        <td className="DealsTableRow--cell DealsTableRow--RemoveBtn" onClick={this.markForRemoval}>X</td>
       </tr>
     )
   }
