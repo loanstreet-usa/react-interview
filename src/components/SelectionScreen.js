@@ -24,7 +24,7 @@ class SelectionScreen extends Component {
     const onConfirmation = this[reason+'Deal'];
     return(
       <div className="SelectionScreen">
-        <h1 className="SelectionReason">{`Would you like to ${reason} the deal above?`}</h1>
+        <h2 className="SelectionReason">{`Would you like to ${reason} the deal above?`}</h2>
         <div className="SelectionBtnArea">
           <p id="ConfirmBtn" className="SelectionBtn" onClick={() => onConfirmation(deal)}>Confirm</p>
           <p id="CancelBtn" className="SelectionBtn" onClick={this.cancelSelection}>Cancel</p>

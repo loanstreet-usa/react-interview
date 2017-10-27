@@ -36,11 +36,11 @@
 }
 
 #ConfirmBtn:hover {
-  background-color: #3cd80d;
+  background-color: #549431;
   color: white;
 }
 
 #CancelBtn:hover {
-  background-color: #FF1212;
+  background-color: #DE4141;
   color: white;
 }

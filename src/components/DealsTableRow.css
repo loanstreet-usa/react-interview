@@ -53,9 +53,15 @@
 }
 
 .DealsTableRow--RemoveBtn {
+  color: #DE4141;
+}
+
+.DealsTableRow--RemoveBtn.DealsTableRow--cell:hover {
+  background-color: #DE4141;
   cursor: pointer;
 }
 
-.DealsTableRow--PublishBtn {
+.DealsTableRow--cell.DealsTableRow--notPublished:hover {
+  background-color: #549431;
   cursor: pointer;
 }

@@ -31,4 +31,5 @@
 .DealsTable--headerCell:last-child {
   border-top-right-radius: 10px;
   border-right: none;
+  cursor: default;
 }

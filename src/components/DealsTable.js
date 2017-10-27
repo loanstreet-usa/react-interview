@@ -16,7 +16,8 @@ class DealsList extends Component {
         dealType: PropTypes.string.isRequired,
         isPublished: PropTypes.bool.isRequired
       })
-    ).isRequired
+    ).isRequired,
+    selectionReason: PropTypes.oneOf(['remove', 'publish', '']).isRequired
   }
 
   sortDeals = e => {
@@ -25,8 +26,13 @@ class DealsList extends Component {
   }
 
   render() {
-    const { deals, onSelectDeal } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} onSelectDeal={onSelectDeal}/>);
+    const { deals, onSelectDeal, selectionReason } = this.props;
+    const dealsTableRows = deals.map(deal => <DealsTableRow
+      key={deal.id}
+      deal={deal}
+      selectionReason={selectionReason}
+      onSelectDeal={onSelectDeal}/>
+    );
     return(
       <div>
         <table className="DealsTable">
