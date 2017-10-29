@@ -2,11 +2,7 @@ import { connect } from 'react-redux';
 import App from '../components/App';
 
 const mapStateToProps = state => {
-  const { selectedDeal, selectionReason } = state;
-  return {
-    selectedDeal,
-    selectionReason
-  };
+  return { selectionReason: state.selectionReason };
 };
 
 export default connect(mapStateToProps, null)(App);

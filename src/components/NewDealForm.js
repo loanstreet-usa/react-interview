@@ -15,7 +15,7 @@ const DEFAULT_DEAL = {
 
 class DealForm extends Component {
   static propTypes = {
-    onCreateDeal: PropTypes.func
+    onCreateDeal: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -31,12 +31,13 @@ class DealForm extends Component {
 
   createDeal = e => {
     e.preventDefault();
-    if (this.props.onCreateDeal && this.isInputValid(this.state)) {
-      const institution = this.state.institution;
-      const dealType = this.state.dealType;
-      const dealSize = this.state.dealSize;
-      const isPublished = this.state.isPublished;
-      this.props.onCreateDeal({ institution, dealType, dealSize, isPublished });
+    if (this.isInputValid(this.state)) {
+      this.props.onCreateDeal({
+        institution: this.state.institution,
+        dealType: this.state.dealType,
+        dealSize: this.state.dealSize,
+        isPublished: this.state.isPublished,
+      });
 
       // Reset state for the next deal input.
       this.setState({ ...DEFAULT_DEAL });
@@ -44,43 +45,66 @@ class DealForm extends Component {
   }
 
   isInputValid(state) {
-    let errorMessages = [];
-    errorMessages = this.isInputMissing(errorMessages, state);
-    errorMessages = this.isDealSizeValid(errorMessages, state);
-    errorMessages = this.isPhraseValid(errorMessages, state.institution, "Institution");
-    errorMessages = this.isPhraseValid(errorMessages, state.dealType, "Deal Type");
-    this.setState({errorMessages})
-    return errorMessages.length === 0;
+    const errorMessages = [];
+    errorMessages.push(this.isInputMissing(state));
+    errorMessages.push(this.isDealSizeValid(state.dealSize));
+    errorMessages.push(this.isDealAmountValid(state.dealSize));
+    errorMessages.push(this.isPhraseValid(state.institution, "Institution"));
+    errorMessages.push(this.isPhraseValid(state.dealType, "Deal Type"));
+    errorMessages.push(this.isCharLengthValid(state.institution, "Institution"));
+    errorMessages.push(this.isCharLengthValid(state.dealType, "Deal Type"));
+    const validMessages = errorMessages.reduce((msgList, msg) => {
+      if (msg !== '') msgList.push(msg);
+      return msgList;
+    },[])
+    this.setState({errorMessages: validMessages})
+    return validMessages.length === 0;
   }
 
-  isInputMissing(errorMessages, state) {
-    if (state.institution === '' || state.dealType === '' || state.dealSize === ''){
-      errorMessages.push('Missing data from input field')
+  isInputMissing(state) {
+    const institution = state.institution === '' ? 'Institution, ' : '';
+    const dealType = state.dealType === '' ? 'Deal Type, ' : '';
+    const dealSize = state.dealSize === '' ? 'Deal Size, ' : '';
+    const missingFields = (institution + dealType + dealSize).slice(0,-2);
+    if (institution !== '' || dealType !== '' || dealSize !== ''){
+      return `Missing input from the following field(s): ${missingFields}.`;
     }
-    return errorMessages;
+    return '';
   }
 
-  isDealSizeValid(errorMessages, state) {
-    const dealSize = Number(state.dealSize);
-    if (!Number.isInteger(dealSize)) errorMessages.push('Invalid number for deal size');
-    return errorMessages;
+  isCharLengthValid(phrase, type) {
+    if (phrase.length !== 0 && (phrase.length < 3 || phrase.length > 30)) {
+      return `Invalid character length for ${type}. Must be between 3 and 30 characters.`;
+    }
+    return '';
   }
 
-  isPhraseValid(errorMessages, phrase, type) {
-    if (!this.areCharactersValid(phrase)) errorMessages.push(`Invalid characters for ${type}, only letters and spaces are allowed`);
-    return errorMessages;
+  isDealAmountValid(dealSize) {
+    if (dealSize.length !== 0 && (dealSize.length < 5 || dealSize.length > 9)) {
+      return `Invalid amount for Deal Size. Must be between $10,000 and $999,999,999.`;
+    }
+    return '';
+  }
+
+  isDealSizeValid(dealSize) {
+    if (!Number.isInteger(Number(dealSize))) return 'Invalid input for deal size. Please enter numbers only.';
+    return '';
+  }
+
+  isPhraseValid(phrase, type) {
+    if (!this.areCharactersValid(phrase)) return `Invalid characters for ${type}, only letters and spaces are allowed.`;
+    return '';
   }
 
   areCharactersValid(phrase) {
     const a = 97;
     const z = 122;
     const space = 32;
-    return phrase.split("").every((char)=>{
+    return phrase.split('').every((char)=>{
       const charCode = char.toLowerCase().charCodeAt(0);
       return (charCode >= a && charCode <= z) || (charCode === space);
     })
   }
-
 
   render() {
     const errorMessages = this.state.errorMessages.map((errorMsg, index)=><li key={index}>{errorMsg}</li>);

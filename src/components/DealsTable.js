@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import noop from 'lodash/noop';
 
 import DealsTableRow from './DealsTableRow';
 import SelectionScreenWithDispatch from '../containers/SelectionScreenWithDispatch';
@@ -17,7 +18,14 @@ class DealsList extends Component {
         isPublished: PropTypes.bool.isRequired
       })
     ).isRequired,
-    selectionReason: PropTypes.oneOf(['remove', 'publish', '']).isRequired
+    selectionReason: PropTypes.oneOf(['remove', 'publish', '']).isRequired,
+    onSortDeals: PropTypes.func.isRequired,
+    onSelectDeal: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    onSortDeals: noop,
+    onSelectDeal: noop,
   }
 
   sortDeals = e => {

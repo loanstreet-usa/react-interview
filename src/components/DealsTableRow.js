@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import noop from 'lodash/noop';
 
 import './DealsTableRow.css';
 
@@ -15,10 +16,20 @@ class DealsTableRow extends Component {
       dealSize: PropTypes.string.isRequired,
       isPublished: PropTypes.bool.isRequired
     }).isRequired,
-    selectionReason: PropTypes.oneOf(['remove', 'publish', '']).isRequired
+    selectionReason: PropTypes.oneOf(['remove', 'publish', '']).isRequired,
+    onSelectDeal: PropTypes.func.isRequired,
   }
 
-  state = { isPublishedText: this.props.deal.isPublished ? 'Yes' : 'No' };
+  static defaultProps = {
+    onSelectDeal: noop,
+  }
+
+  state = { pubCellText: this.props.deal.isPublished ? 'Yes' : 'No' };
+
+  componentWillReceiveProps = (nextProps) => {
+    // this operation is performed to update pubCellText after a deal has been published.
+    if (nextProps.deal.isPublished && this.state.pubCellText === 'No') this.setState({ pubCellText : 'Yes' });
+  }
 
   markForRemoval = e => {
     if (this.props.selectionReason === '') {
@@ -28,37 +39,38 @@ class DealsTableRow extends Component {
 
   markForPublication = e => {
     if (!this.props.deal.isPublished && this.props.selectionReason === '') {
-      this.setState({isPublishedText : 'No'})
+      this.setState({ pubCellText : 'No' });
       this.props.onSelectDeal(this.props.deal, 'publish');
     }
   }
 
-  mouseEnter = e => {
+  mouseEnterPubCell = e => {
     if (!this.props.deal.isPublished && this.props.selectionReason === '') {
-      this.setState({isPublishedText : 'Publish Now?'})
+      this.setState({ pubCellText : 'Publish Now?' });
     }
   }
-  mouseLeave = e => {
+  mouseLeavePubCell = e => {
     if (!this.props.deal.isPublished && this.props.selectionReason === '') {
-      this.setState({isPublishedText : 'No'})
+      this.setState({ pubCellText : 'No' });
     }
   }
 
   render() {
     const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
-    const isDealAlreadySelected = this.props.selectionReason !== '';
-    const publicationStatusClass = isPublished || isDealAlreadySelected ? '' : 'DealsTableRow--notPublished';
-    const isPublishedText = isPublished ? 'Yes' : this.state.isPublishedText;
+    const isDealSelected = this.props.selectionReason !== '';
+
+    // add special CSS class to "isPublished?"" cells of deals not yet published.
+    const pubCssClass = isPublished || isDealSelected ? '' : 'DealsTableRow--notPublished';
     return (
       <tr className="DealsTableRow">
         <td className="DealsTableRow--cell">{institution}</td>
         <td className="DealsTableRow--cell">{dealType}</td>
         <td className="DealsTableRow--cell">{currencyAmountToString(dealSize)}</td>
-        <td className={'DealsTableRow--cell ' + publicationStatusClass}
-          onMouseEnter={this.mouseEnter}
-          onMouseLeave={this.mouseLeave}
+        <td className={'DealsTableRow--cell ' + pubCssClass}
+          onMouseEnter={this.mouseEnterPubCell}
+          onMouseLeave={this.mouseLeavePubCell}
           onClick={this.markForPublication}>
-          {isPublishedText}
+          {this.state.pubCellText}
         </td>
         <td className="DealsTableRow--cell DealsTableRow--RemoveBtn" onClick={this.markForRemoval}>X</td>
       </tr>
