@@ -14,11 +14,13 @@ const DEFAULT_DEAL = {
 
 class DealForm extends Component {
   static propTypes = {
-    onCreateDeal: PropTypes.func
+    onCreateDeal: PropTypes.func,
+    onDeleteDeal: PropTypes.func
   }
 
   static defaultProps = {
-    onCreateDeal: noop
+    onCreateDeal: noop,
+    onDeleteDeal: noop
   }
 
   // State represents a deal.
@@ -30,12 +32,19 @@ class DealForm extends Component {
 
   createDeal = e => {
     e.preventDefault();
-    if (this.props.onCreateDeal)
+    if (!this.state.institution || !this.state.dealType || !this.state.dealSize || Number.isNaN(+this.state.dealSize)) {
+      alert('invalid input');
+    }
+    else if (this.props.onCreateDeal) {
       this.props.onCreateDeal({ ...this.state });
 
-    // Reset state for the next deal input.
-    this.setState({ ...DEFAULT_DEAL });
+      // Reset state for the next deal input.
+      this.setState({ ...DEFAULT_DEAL });
+    }
+
   }
+
+
 
   render() {
     return (
