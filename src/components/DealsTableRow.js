@@ -58,9 +58,8 @@ class DealsTableRow extends Component {
   render() {
     const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
     const isDealSelected = this.props.selectionReason !== '';
-
-    // add special CSS class to "isPublished?"" cells of deals not yet published.
     const pubCssClass = isPublished || isDealSelected ? '' : 'DealsTableRow--notPublished';
+    const removalCssClass = isDealSelected ? '' : 'DealsTableRow--RemoveBtn';
     return (
       <tr className="DealsTableRow">
         <td className="DealsTableRow--cell">{institution}</td>
@@ -72,7 +71,7 @@ class DealsTableRow extends Component {
           onClick={this.markForPublication}>
           {this.state.pubCellText}
         </td>
-        <td className="DealsTableRow--cell DealsTableRow--RemoveBtn" onClick={this.markForRemoval}>X</td>
+        <td className={'DealsTableRow--cell ' + removalCssClass} onClick={this.markForRemoval}>X</td>
       </tr>
     )
   }

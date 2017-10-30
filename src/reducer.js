@@ -9,7 +9,7 @@ import {
 
 var nextDealId = 3;
 
-const initialState = {
+export const initialState = {
   deals: [
     {
       id: 1,
@@ -85,18 +85,15 @@ const numSort = (deals, sortCriteria) => {
   })
 }
 
-const updateDealsForRemoval = (state, dealToBeRemoved) => {
-  return state.deals.reduce((deals, currentDeal, index)=>{
-    if (currentDeal !== dealToBeRemoved) {
-      const updatedDeal = (currentDeal.id === index + 1) ? currentDeal : {...currentDeal, id: index + 1};
-      deals.push(updatedDeal);
-    }
-    return deals;
+const updateDealsForRemoval = (deals, dealToBeRemoved) => {
+  return deals.reduce((remainingDeals, currentDeal) => {
+    if (currentDeal !== dealToBeRemoved) remainingDeals.push(currentDeal);
+    return remainingDeals;
   },[]);
 }
 
-const updateDealsForPublication = (state, dealToBePublished) => {
-  return state.deals.map((deal)=>{
+const updateDealsForPublication = (deals, dealToBePublished) => {
+  return deals.map((deal)=>{
     return deal === dealToBePublished ? {...deal, isPublished: true} : deal;
   });
 }
@@ -111,9 +108,17 @@ export default (state = initialState, { type, payload }) => {
       const sortedDeals = sortDeals([...state.deals], payload.sortCriteria);
       return { ...state, deals: sortedDeals };
     case REMOVE_DEAL:
-      return {...initialState, deals: updateDealsForRemoval(state, payload.deal)};
+      return {
+        deals: updateDealsForRemoval(state.deals, payload.deal),
+        selectedDeal: { ...initialState.selectedDeal },
+        selectionReason: '',
+      };
     case PUBLISH_DEAL:
-      return {...initialState, deals: updateDealsForPublication(state, payload.deal)};
+      return {
+        deals: updateDealsForPublication(state.deals, payload.deal),
+        selectedDeal: { ...initialState.selectedDeal },
+        selectionReason: ''
+      };
     case CANCEL_SELECTION:
       return { ...state, selectedDeal: {...initialState.selectedDeal}, selectionReason: ''};
     default:
