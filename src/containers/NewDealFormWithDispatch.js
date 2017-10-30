@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createDeal } from '../actions';
+import { createDeal, deleteDeal } from '../actions';
 import NewDealForm from '../components/NewDealForm';
 
 const mapDispatchToProps = dispatch => {

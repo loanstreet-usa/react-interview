@@ -30,11 +30,20 @@ class DealForm extends Component {
 
   createDeal = e => {
     e.preventDefault();
+
+    const fields = ['institution', 'dealType', 'dealSize'];
+
+    const isValid = fields.every(x => typeof this.state[x] === 'string' && this.state[x].trim().length > 0);
+
+    if (!isValid) return;
+
     if (this.props.onCreateDeal)
-      this.props.onCreateDeal({ ...this.state });
+      this.props.onCreateDeal({ ...this.state, isPublished: true });
 
     // Reset state for the next deal input.
     this.setState({ ...DEFAULT_DEAL });
+
+    console.error(this.state);
   }
 
   render() {

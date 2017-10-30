@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { deleteDeal } from '../actions';
 import DealsTableRow from './DealsTableRow';
 
 import './DealsTable.css';
@@ -19,8 +20,9 @@ class DealsList extends Component {
   }
 
   render() {
+    console.error(this.props);
     const { deals } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
+    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal}  onDelete={() => this.onDelete(deal.id)} />);
     return(
       <div>
         <table className="DealsTable">
@@ -30,6 +32,7 @@ class DealsList extends Component {
               <th className="DealsTable--headerCell">Deal Type</th>
               <th className="DealsTable--headerCell">Deal Size</th>
               <th className="DealsTable--headerCell">Is Published?</th>
+              <th className="DealsTable--headerCell">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -38,6 +41,11 @@ class DealsList extends Component {
         </table>
       </div>
     );
+  }
+
+  onDelete = (id) => {
+    const { dispatch } = this.props;
+    dispatch(deleteDeal(id))
   }
 }
 

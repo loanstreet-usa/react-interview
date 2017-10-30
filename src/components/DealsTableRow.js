@@ -18,13 +18,18 @@ class DealsTableRow extends Component {
   }
 
   render() {
-    const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
+    const { deal: { institution, dealType, dealSize, isPublished }, onDelete } = this.props;
     return (
       <tr className="DealsTableRow">
         <td className="DealsTableRow--cell">{institution}</td>
         <td className="DealsTableRow--cell">{dealType}</td>
         <td className="DealsTableRow--cell">{currencyAmountToString(dealSize)}</td>
         <td className="DealsTableRow--cell">{isPublished ? 'Yes' : 'No'}</td>
+        <td className="DealsTableRow--cell">
+          <button onClick={onDelete}>
+            Delete
+          </button>
+        </td>
       </tr>
     )
   }
