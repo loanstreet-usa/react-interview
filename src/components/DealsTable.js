@@ -20,7 +20,7 @@ class DealsList extends Component {
 
   render() {
     const { deals } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
+    const dealsTableRows = deals.map(deal => <DealsTableRow delete={this.delete} key={deal.id} deal={deal} />);
     return(
       <div>
         <table className="DealsTable">
@@ -30,6 +30,8 @@ class DealsList extends Component {
               <th className="DealsTable--headerCell">Deal Type</th>
               <th className="DealsTable--headerCell">Deal Size</th>
               <th className="DealsTable--headerCell">Is Published?</th>
+              <th className="DealsTable--headerCell">Publish</th>
+              <th className="DealsTable--headerCell">Delete</th>
             </tr>
           </thead>
           <tbody>
