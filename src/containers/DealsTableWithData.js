@@ -1,11 +1,20 @@
 import { connect } from 'react-redux';
+import { sortDeals, selectDeal } from '../actions';
 import DealsTable from '../components/DealsTable';
 
 const mapStateToProps = state => {
-  const { deals } = state;
+  const deals = state.selectedDeal.institution === '' ? state.deals : [state.selectedDeal];
   return {
-    deals
+    deals,
+    selectionReason: state.selectionReason
   };
 };
 
-export default connect(mapStateToProps)(DealsTable);
+const mapDispatchToProps = dispatch => {
+  return {
+    onSortDeals: sortCriteria => dispatch(sortDeals(sortCriteria)),
+    onSelectDeal: (selectedDeal, reason) => dispatch(selectDeal(selectedDeal, reason))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DealsTable);

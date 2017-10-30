@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import noop from 'lodash/noop';
 
 import DealsTableRow from './DealsTableRow';
+import SelectionScreenWithDispatch from '../containers/SelectionScreenWithDispatch';
 
 import './DealsTable.css';
 
@@ -15,27 +17,47 @@ class DealsList extends Component {
         dealType: PropTypes.string.isRequired,
         isPublished: PropTypes.bool.isRequired
       })
-    ).isRequired
+    ).isRequired,
+    selectionReason: PropTypes.oneOf(['remove', 'publish', '']).isRequired,
+    onSortDeals: PropTypes.func.isRequired,
+    onSelectDeal: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    onSortDeals: noop,
+    onSelectDeal: noop,
+  }
+
+  sortDeals = e => {
+    const sortCriteria = e.target.firstChild.nodeValue;
+    this.props.onSortDeals(sortCriteria);
   }
 
   render() {
-    const { deals } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
+    const { deals, onSelectDeal, selectionReason } = this.props;
+    const dealsTableRows = deals.map(deal => <DealsTableRow
+      key={deal.id}
+      deal={deal}
+      selectionReason={selectionReason}
+      onSelectDeal={onSelectDeal}/>
+    );
     return(
       <div>
         <table className="DealsTable">
           <thead>
             <tr>
-              <th className="DealsTable--headerCell">Institution</th>
-              <th className="DealsTable--headerCell">Deal Type</th>
-              <th className="DealsTable--headerCell">Deal Size</th>
-              <th className="DealsTable--headerCell">Is Published?</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Institution</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Deal Type</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Deal Size</th>
+              <th className="DealsTable--headerCell" onClick={this.sortDeals}>Is Published?</th>
+              <th className="DealsTable--headerCell">Remove Deal</th>
             </tr>
           </thead>
           <tbody>
             {dealsTableRows}
           </tbody>
         </table>
+        {(this.props.selectionReason !== '') && <SelectionScreenWithDispatch />}
       </div>
     );
   }

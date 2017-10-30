@@ -1,6 +1,6 @@
 .DealsTableRow {
   border-top: 1px solid #C1C3D1;
-  border-bottom-: 1px solid #C1C3D1;
+  border-bottom: 1px solid #C1C3D1;
   color: #666B85;
   font-size: 16px;
   font-weight: normal;
@@ -50,4 +50,18 @@
 
 .DealsTableRow--cell:last-child {
   border-right: 0px;
+}
+
+.DealsTableRow--RemoveBtn {
+  color: #DE4141;
+}
+
+.DealsTableRow--RemoveBtn.DealsTableRow--cell:hover {
+  background-color: #DE4141;
+  cursor: pointer;
+}
+
+.DealsTableRow--cell.DealsTableRow--notPublished:hover {
+  background-color: #549431;
+  cursor: pointer;
 }

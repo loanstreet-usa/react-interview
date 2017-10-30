@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import noop from 'lodash/noop';
 
 import './DealsTableRow.css';
 
@@ -14,17 +15,63 @@ class DealsTableRow extends Component {
       dealType: PropTypes.string.isRequired,
       dealSize: PropTypes.string.isRequired,
       isPublished: PropTypes.bool.isRequired
-    }).isRequired
+    }).isRequired,
+    selectionReason: PropTypes.oneOf(['remove', 'publish', '']).isRequired,
+    onSelectDeal: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    onSelectDeal: noop,
+  }
+
+  state = { pubCellText: this.props.deal.isPublished ? 'Yes' : 'No' };
+
+  componentWillReceiveProps = (nextProps) => {
+    // this operation is performed to update pubCellText after a deal has been published.
+    if (nextProps.deal.isPublished && this.state.pubCellText === 'No') this.setState({ pubCellText : 'Yes' });
+  }
+
+  markForRemoval = e => {
+    if (this.props.selectionReason === '') {
+      this.props.onSelectDeal(this.props.deal, 'remove');
+    }
+  }
+
+  markForPublication = e => {
+    if (!this.props.deal.isPublished && this.props.selectionReason === '') {
+      this.setState({ pubCellText : 'No' });
+      this.props.onSelectDeal(this.props.deal, 'publish');
+    }
+  }
+
+  mouseEnterPubCell = e => {
+    if (!this.props.deal.isPublished && this.props.selectionReason === '') {
+      this.setState({ pubCellText : 'Publish Now?' });
+    }
+  }
+  mouseLeavePubCell = e => {
+    if (!this.props.deal.isPublished && this.props.selectionReason === '') {
+      this.setState({ pubCellText : 'No' });
+    }
   }
 
   render() {
     const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
+    const isDealSelected = this.props.selectionReason !== '';
+    const pubCssClass = isPublished || isDealSelected ? '' : 'DealsTableRow--notPublished';
+    const removalCssClass = isDealSelected ? '' : 'DealsTableRow--RemoveBtn';
     return (
       <tr className="DealsTableRow">
         <td className="DealsTableRow--cell">{institution}</td>
         <td className="DealsTableRow--cell">{dealType}</td>
         <td className="DealsTableRow--cell">{currencyAmountToString(dealSize)}</td>
-        <td className="DealsTableRow--cell">{isPublished ? 'Yes' : 'No'}</td>
+        <td className={'DealsTableRow--cell ' + pubCssClass}
+          onMouseEnter={this.mouseEnterPubCell}
+          onMouseLeave={this.mouseLeavePubCell}
+          onClick={this.markForPublication}>
+          {this.state.pubCellText}
+        </td>
+        <td className={'DealsTableRow--cell ' + removalCssClass} onClick={this.markForRemoval}>X</td>
       </tr>
     )
   }
