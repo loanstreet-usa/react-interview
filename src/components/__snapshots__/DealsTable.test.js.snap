@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1`] = `
+<div>
+  <table
+    className="DealsTable"
+  >
+    <thead>
+      <tr>
+        <th
+          className="DealsTable--headerCell"
+        >
+          Institution
+        </th>
+        <th
+          className="DealsTable--headerCell"
+        >
+          Deal Type
+        </th>
+        <th
+          className="DealsTable--headerCell"
+        >
+          Deal Size
+        </th>
+        <th
+          className="DealsTable--headerCell"
+        >
+          Is Published?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="DealsTableRow"
+      >
+        <td
+          className="DealsTableRow--cell"
+        >
+          LS Credit Union
+        </td>
+        <td
+          className="DealsTableRow--cell"
+        >
+          Consumer Auto
+        </td>
+        <td
+          className="DealsTableRow--cell"
+        >
+          $1,000,000
+        </td>
+        <td
+          className="DealsTableRow--cell"
+        >
+          Yes
+        </td>
+      </tr>
+      <tr
+        className="DealsTableRow"
+      >
+        <td
+          className="DealsTableRow--cell"
+        >
+          LS Credit Union
+        </td>
+        <td
+          className="DealsTableRow--cell"
+        >
+          Real Estate
+        </td>
+        <td
+          className="DealsTableRow--cell"
+        >
+          $5,000,000
+        </td>
+        <td
+          className="DealsTableRow--cell"
+        >
+          No
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
