@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders 1`] = `
+<th
+  className="DealsTable--headerCell"
+  onClick={[Function]}
+>
+  <span>
+    *
+  </span>
+  Mock Header
+</th>
+`;
