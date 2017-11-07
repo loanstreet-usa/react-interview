@@ -6,6 +6,12 @@ exports[`Renders 1`] = `
 >
   <td
     className="DealsTableRow--cell"
+    onClick={[Function]}
+  >
+    x
+  </td>
+  <td
+    className="DealsTableRow--cell"
   >
     LS Credit Union
   </td>

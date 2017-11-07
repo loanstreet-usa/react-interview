@@ -1,11 +1,22 @@
 import { connect } from 'react-redux';
+// import { dispatch } from 'redux';
+import { removeDeal, sortDeals } from '../actions';
 import DealsTable from '../components/DealsTable';
 
 const mapStateToProps = state => {
-  const { deals } = state;
+  const { deals, sortField, reverseSort } = state;
   return {
-    deals
+    deals,
+    sortField,
+    reverseSort,
   };
 };
 
-export default connect(mapStateToProps)(DealsTable);
+const mapDispatchToProps = dispatch => {
+  return {
+    onRemoveDeal: deal => dispatch(removeDeal(deal)),
+    onSortDeals: field => dispatch(sortDeals(field)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DealsTable);
