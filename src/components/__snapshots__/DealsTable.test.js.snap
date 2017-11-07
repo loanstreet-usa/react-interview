@@ -9,21 +9,31 @@ exports[`Renders 1`] = `
       <tr>
         <th
           className="DealsTable--headerCell"
+        />
+        <th
+          className="DealsTable--headerCell"
+          onClick={[Function]}
         >
           Institution
         </th>
         <th
           className="DealsTable--headerCell"
+          onClick={[Function]}
         >
+          <span>
+            *
+          </span>
           Deal Type
         </th>
         <th
           className="DealsTable--headerCell"
+          onClick={[Function]}
         >
           Deal Size
         </th>
         <th
           className="DealsTable--headerCell"
+          onClick={[Function]}
         >
           Is Published?
         </th>
@@ -33,6 +43,12 @@ exports[`Renders 1`] = `
       <tr
         className="DealsTableRow"
       >
+        <td
+          className="DealsTableRow--cell"
+          onClick={[Function]}
+        >
+          x
+        </td>
         <td
           className="DealsTableRow--cell"
         >
@@ -57,6 +73,12 @@ exports[`Renders 1`] = `
       <tr
         className="DealsTableRow"
       >
+        <td
+          className="DealsTableRow--cell"
+          onClick={[Function]}
+        >
+          x
+        </td>
         <td
           className="DealsTableRow--cell"
         >
