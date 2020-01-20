@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
 
@@ -17,7 +17,7 @@ const DEFAULT_ERRORS = {
   dealSize: null
 }
 
-class DealForm extends Component {
+class DealForm extends PureComponent {
   static propTypes = {
     onCreateDeal: PropTypes.func
   }
@@ -30,7 +30,6 @@ class DealForm extends Component {
   state = { deal: { ...DEFAULT_DEAL }, errors: { ...DEFAULT_ERRORS } };
 
   propertyUpdater(e, property) {
-    console.log("trigger change")
     if (this.state.errors[property] !== null) {
       this.setState({ errors: { ...this.state.errors, [property]: null } })
     }
