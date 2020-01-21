@@ -1,0 +1,9 @@
+#RemoveDealForm--button-container {
+  display: flex;
+  justify-content: center;
+}
+#RemoveDealForm--button {
+  font-size: 20px;
+  margin: 10px;
+  width: 200px;
+}

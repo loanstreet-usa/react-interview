@@ -1,0 +1,15 @@
+.RemoveDealModal--modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  max-height: 55vh;
+  max-width: 55vw;
+  overflow: auto;
+  background-color: #fff;
+  margin-right: -50%;
+  padding: 2%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

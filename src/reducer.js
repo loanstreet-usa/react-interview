@@ -1,4 +1,5 @@
-import { CREATE_DEAL } from './actions';
+import { CREATE_DEAL, REMOVE_DEAL } from './actions';
+
 
 var nextDealId = 3;
 
@@ -22,9 +23,11 @@ const initialState = {
 };
 
 export default (state = initialState, { type, payload }) => {
-  switch(type) {
+  switch (type) {
     case CREATE_DEAL:
-      return { ...state, deals: [ ...state.deals, { ...payload.deal, id: nextDealId++ } ] };
+      return { ...state, deals: [...state.deals, { ...payload.deal, id: nextDealId++ }] };
+    case REMOVE_DEAL:
+      return { ...state, deals: state.deals.filter((deal) => deal.id !== payload.id) }
     default:
       return state;
   }
