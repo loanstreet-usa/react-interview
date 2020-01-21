@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import DealsTableRow from './DealsTableRow';
+import DealsTableRowWithDispatch from '../containers/DealsTableRowWithDispatch';
 
 import './DealsTable.css';
 
@@ -20,7 +19,7 @@ class DealsList extends Component {
 
   render() {
     const { deals } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
+    const dealsTableRows = deals.map(deal => <DealsTableRowWithDispatch key={deal.id} deal={deal} />);
     return (
       <div>
         <table className="DealsTable">

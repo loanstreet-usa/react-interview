@@ -1,4 +1,4 @@
-import { CREATE_DEAL, REMOVE_DEAL } from './actions';
+import { CREATE_DEAL, REMOVE_DEAL, TOGGLE_PUBLISH_DEAL } from './actions';
 
 
 var nextDealId = 3;
@@ -27,7 +27,17 @@ export default (state = initialState, { type, payload }) => {
     case CREATE_DEAL:
       return { ...state, deals: [...state.deals, { ...payload.deal, id: nextDealId++ }] };
     case REMOVE_DEAL:
-      return { ...state, deals: state.deals.filter((deal) => deal.id !== payload.id) }
+      return {
+        ...state,
+        deals: state.deals.filter((deal) =>
+          deal.id !== payload.id)
+      };
+    case TOGGLE_PUBLISH_DEAL:
+      return {
+        ...state,
+        deals: state.deals.map((deal) =>
+          deal.id === payload.id ? { ...deal, isPublished: !deal.isPublished } : deal)
+      };
     default:
       return state;
   }

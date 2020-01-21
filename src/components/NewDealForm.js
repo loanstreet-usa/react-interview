@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
 
@@ -17,7 +17,7 @@ const DEFAULT_ERRORS = {
   dealSize: null
 }
 
-class DealForm extends PureComponent {
+class DealForm extends React.Component {
   static propTypes = {
     onCreateDeal: PropTypes.func
   }

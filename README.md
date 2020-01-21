@@ -26,6 +26,8 @@ Please complete at least one feature and answer at least one question
 
 ### Add ability to remove deals from the `DealsTable` (interface up to you).
 
+**[Complete]**
+
 ### Add ability to publish a deal from the `DealsTable` (interface up to you).
 
 ### Add ability to sort deal rows in ascending or descending order by clicking the header cell of the different fields by which you wish to order.

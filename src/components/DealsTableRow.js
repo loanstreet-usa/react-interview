@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RemoveDealModal from './RemoveDealModal'
-
 import './DealsTableRow.css';
 
 
@@ -23,17 +22,24 @@ class DealsTableRow extends Component {
     modalIsOpen: false
   }
 
-
   render() {
-    const { deal: { institution, dealType, dealSize, isPublished } } = this.props;
+    const { deal: { institution, dealType, dealSize, isPublished, id } } = this.props;
     return (
       <tr className="DealsTableRow">
         <td className="DealsTableRow--cell">{institution}</td>
         <td className="DealsTableRow--cell">{dealType}</td>
         <td className="DealsTableRow--cell">{currencyAmountToString(dealSize)}</td>
-        <td className="DealsTableRow--cell">{isPublished ? 'Yes' : 'No'}</td>
-        <td className="DealsTableRow--cell DealsTableRow--remove" onClick={() => this.setState({ modalIsOpen: true })}>X</td>
-        <RemoveDealModal deal={this.props.deal} isOpen={this.state.modalIsOpen} closeModal={() => this.setState({ modalIsOpen: false })}></RemoveDealModal>
+        <td className="DealsTableRow--cell DealsTableRow--published"
+          onClick={() => this.props.onTogglePublishDeal(id)}>
+          {isPublished ?
+            <><span>Yes</span><button className="DealsTableRow--button">Unpublish</button></> :
+            <><span>No</span><button className="DealsTableRow--button">Publish</button></>
+          }</td>
+        <td className="DealsTableRow--cell DealsTableRow--remove"
+          onClick={() => this.setState({ modalIsOpen: true })}>X</td>
+        <RemoveDealModal deal={this.props.deal}
+          isOpen={this.state.modalIsOpen}
+          closeModal={() => this.setState({ modalIsOpen: false })}></RemoveDealModal>
       </tr>
 
     )
