@@ -4,6 +4,13 @@ import DealsTableRowWithDispatch from '../containers/DealsTableRowWithDispatch';
 
 import './DealsTable.css';
 
+const dealPropName = {
+  institution: "Institution",
+  dealType: "Deal Type",
+  dealSize: "Deal Size",
+  isPublished: "Is Published?"
+}
+
 class DealsList extends Component {
   static propTypes = {
     deals: PropTypes.arrayOf(
@@ -14,21 +21,29 @@ class DealsList extends Component {
         dealType: PropTypes.string.isRequired,
         isPublished: PropTypes.bool.isRequired
       })
-    ).isRequired
+    ).isRequired,
+    sort: PropTypes.shape({
+      by: PropTypes.string.isRequired,
+      order: PropTypes.string.isRequired
+    }).isRequired
   }
 
+
   render() {
-    const { deals } = this.props;
+    const { deals, onSortDeals, sort } = this.props;
     const dealsTableRows = deals.map(deal => <DealsTableRowWithDispatch key={deal.id} deal={deal} />);
     return (
       <div>
         <table className="DealsTable">
           <thead>
             <tr>
-              <th className="DealsTable--headerCell">Institution</th>
-              <th className="DealsTable--headerCell">Deal Type</th>
-              <th className="DealsTable--headerCell">Deal Size</th>
-              <th className="DealsTable--headerCell">Is Published?</th>
+              {Object.keys(dealPropName).map((name) => {
+                return <th className="DealsTable--headerCell" onClick={() => onSortDeals(name, sort.by === name && sort.order ? false : true)}>
+                  <span>{dealPropName[name]}</span>
+                  <span className="DealsTable--sortOrder">{sort.by === name ? (sort.order ? '▲' : '▼') : ''}</span>
+                </th>
+              })
+              }
               <th className="DealsTable--headerCell"></th>
             </tr>
           </thead>

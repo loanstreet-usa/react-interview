@@ -1,7 +1,6 @@
-
 .DealsTable {
   background: white;
-  border-radius:3px;
+  border-radius: 3px;
   border-collapse: collapse;
   margin: auto;
   padding: 5px;
@@ -11,7 +10,7 @@
 }
 
 .DealsTable--headerCell {
-  color: #D5DDE5;
+  color: #d5dde5;
   background: #1b1e24;
   border-bottom: 4px solid #9ea7af;
   border-right: 1px solid #343a45;
@@ -30,4 +29,9 @@
 .DealsTable--headerCell:last-child {
   border-top-right-radius: 10px;
   border-right: none;
+}
+
+.DealsTable--sortOrder {
+  font-size: 10px;
+  padding-left: 20px;
 }

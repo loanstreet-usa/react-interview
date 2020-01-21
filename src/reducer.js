@@ -1,4 +1,4 @@
-import { CREATE_DEAL, REMOVE_DEAL, TOGGLE_PUBLISH_DEAL } from './actions';
+import { CREATE_DEAL, REMOVE_DEAL, TOGGLE_PUBLISH_DEAL, SORT_DEALS } from './actions';
 
 
 var nextDealId = 3;
@@ -14,12 +14,30 @@ const initialState = {
     },
     {
       id: 2,
-      institution: 'LS Credit Union',
+      institution: 'AS Credit Union',
+      dealSize: '5000000',
+      dealType: 'Real Estate',
+      isPublished: false,
+    },
+    {
+      id: 3,
+      institution: 'ZS Credit Union',
+      dealSize: '5000000',
+      dealType: 'Real Estate',
+      isPublished: false,
+    },
+    {
+      id: 4,
+      institution: 'AS Credit Union',
       dealSize: '5000000',
       dealType: 'Real Estate',
       isPublished: false,
     }
-  ]
+  ],
+  sort: {
+    by: "id",
+    order: "dsc"
+  }
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -38,6 +56,18 @@ export default (state = initialState, { type, payload }) => {
         deals: state.deals.map((deal) =>
           deal.id === payload.id ? { ...deal, isPublished: !deal.isPublished } : deal)
       };
+    case SORT_DEALS:
+      const { by, order } = payload;
+      console.log("sorting", by, order)
+      console.log(state.deals.sort((a, b) => a[by] > b[by] ? 1 : -1))
+      return {
+        ...state,
+        deals: [...state.deals.sort((a, b) => a[by] > b[by] && order ? 1 : -1)],
+        sort: {
+          by,
+          order
+        }
+      }
     default:
       return state;
   }
