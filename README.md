@@ -47,9 +47,11 @@ The data seems to be relational in schema. I would implement a SQL database & co
 
 Returns an array of deals
 
-##### Request
+##### Request Param
 
-Empty
+sort - column to sort by
+
+order - asc or dsc
 
 ##### Sample Response
 
