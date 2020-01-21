@@ -18,20 +18,6 @@ const initialState = {
       dealSize: '5000000',
       dealType: 'Real Estate',
       isPublished: false,
-    },
-    {
-      id: 3,
-      institution: 'ZS Credit Union',
-      dealSize: '5000000',
-      dealType: 'Real Estate',
-      isPublished: false,
-    },
-    {
-      id: 4,
-      institution: 'AS Credit Union',
-      dealSize: '5000000',
-      dealType: 'Real Estate',
-      isPublished: false,
     }
   ],
   sort: {
@@ -58,8 +44,6 @@ export default (state = initialState, { type, payload }) => {
       };
     case SORT_DEALS:
       const { by, order } = payload;
-      console.log("sorting", by, order)
-      console.log(state.deals.sort((a, b) => a[by] > b[by] ? 1 : -1))
       return {
         ...state,
         deals: [...state.deals.sort((a, b) => a[by] > b[by] && order ? 1 : -1)],

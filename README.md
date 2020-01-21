@@ -34,6 +34,8 @@ Please complete at least one feature and answer at least one question
 
 ### Add ability to sort deal rows in ascending or descending order by clicking the header cell of the different fields by which you wish to order.
 
+**[Complete]**
+
 ## Questions
 
 ### `NewDealForm` will rerender some of its children unnecessarily. Why? What is the generally recommended solution?
@@ -122,3 +124,5 @@ id
 To load in the initial data, I would first define a schema using SQL. Then, I would analyze the quality of the initial data and decide what type of ETL process I should use to load it in. This could as involved as writing a script to read the file line-by-line to perform necessary transformations before loading the data, or if the dataset is smaller & cleaner to begin with, I would manually look through the data and clean it before loading it in using SQL.
 
 - What other suggestions can you make to improve the quality of the code?
+
+I would implement React Hooks in place of the majority of the class components to make the code more lightweight.

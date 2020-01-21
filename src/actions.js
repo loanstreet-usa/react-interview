@@ -31,7 +31,6 @@ export function togglePublishDeal(id) {
 }
 
 export function sortDeals(by, order) {
-  console.log("sorting deals", by, order)
   return {
     type: SORT_DEALS,
     payload: {

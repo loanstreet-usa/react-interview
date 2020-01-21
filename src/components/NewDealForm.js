@@ -4,7 +4,6 @@ import noop from 'lodash/noop';
 
 import './NewDealForm.css';
 
-// We might make this another property.
 const DEFAULT_DEAL = {
   institution: '',
   dealType: '',
@@ -26,7 +25,6 @@ class DealForm extends React.Component {
     onCreateDeal: noop
   }
 
-  // State represents a deal.
   state = { deal: { ...DEFAULT_DEAL }, errors: { ...DEFAULT_ERRORS } };
 
   propertyUpdater(e, property) {
@@ -35,8 +33,6 @@ class DealForm extends React.Component {
     }
     this.setState({ deal: { ...this.state.deal, [property]: e.target.value } });
   }
-
-
 
   createDeal = e => {
     e.preventDefault();
