@@ -12,6 +12,8 @@ const DEFAULT_DEAL = {
   isPublished: false,
 };
 
+const numberPattern = new RegExp('^[0-9]*$');
+
 class DealForm extends Component {
   static propTypes = {
     onCreateDeal: PropTypes.func,
@@ -29,14 +31,9 @@ class DealForm extends Component {
 
   propertyUpdater(property) {
     return e => {
-      // TODO: check for input type
-
       // Reset error messages on user input.
       if (this.errorMessages.length) {
         this.errorMessages = [];
-      }
-      if (property === 'dealSize') {
-        console.log(typeof +e.target.value);
       }
       return this.setState({ [property]: e.target.value });
     };
@@ -59,6 +56,8 @@ class DealForm extends Component {
     }
     if (!this.state.dealSize) {
       this.errorMessages.push('Deal size is a required field');
+    } else if (!numberPattern.test(this.state.dealSize)) {
+      this.errorMessages.push('Deal size must be numbers');
     }
   }
 
@@ -117,7 +116,11 @@ class DealForm extends Component {
               />
             </label>
           </div>
-          <button className="NewDealForm--button" onClick={this.createDeal}>
+          <button
+            className="NewDealForm--button"
+            disabled={!this.hasAllValues}
+            onClick={this.createDeal}
+          >
             Create Deal
           </button>
         </form>
