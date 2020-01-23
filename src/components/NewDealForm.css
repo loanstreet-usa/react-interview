@@ -26,3 +26,14 @@
   margin-top: 10px;
   width: 300px;
 }
+
+.NewDealForm--errors-container {
+  color: red;
+  text-align: left;
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+.NewDealForm--errors-list {
+  margin: 0rem;
+}
