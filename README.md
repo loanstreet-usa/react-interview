@@ -1,6 +1,6 @@
 # Setup
 
-Clone or Fork the repo 
+Clone or Fork the repo
 
 You need yarn installed (For Mac, `brew install yarn`).
 
@@ -8,7 +8,7 @@ To install run `yarn install`
 
 To start a local server run the command `yarn start` in the root directory of the repository.
 
-After completion you can 
+After completion you can
 
 - Submit a pull request
 
@@ -31,6 +31,7 @@ Please complete at least one feature and answer at least one question
 ## Questions
 
 * `NewDealForm` will rerender some of its children unnecessarily.  Why? What is the generally recommended solution?
+The `propertyUpdater` method resets the state with every input change in any of the three fields, which results in a lot of rerendering. In React apps, every `setState` causes a rerender. The extra rerendering can be avoided by 1) not re-setting the state on input change, but instead grab all the input values on form submit; or 2) making each input field pure components, and use the `shouldComponentUpdate` lifecycle hook to check for differences and determine the necessity to re-render.
 
 * How would you hook this frontend to a backend (vs storing the data locally in the store only).  How would you load initial data?
 
