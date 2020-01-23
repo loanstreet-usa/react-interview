@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import noop from 'lodash/noop';
 
 import DealsTableRow from './DealsTableRow';
 
@@ -7,21 +8,33 @@ import './DealsTable.css';
 
 class DealsList extends Component {
   static propTypes = {
+    onDeleteDeal: PropTypes.func.isRequired,
     deals: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
         institution: PropTypes.string.isRequired,
         dealSize: PropTypes.string.isRequired,
         dealType: PropTypes.string.isRequired,
-        isPublished: PropTypes.bool.isRequired
+        isPublished: PropTypes.bool.isRequired,
       })
-    ).isRequired
-  }
+    ).isRequired,
+  };
+
+  static defaultProps = {
+    onDeleteDeal: noop,
+  };
+
+  deleteDeal = id => {
+    if (this.props.onDeleteDeal && id) {
+      this.props.onDeleteDeal(id);
+    }
+  };
 
   render() {
     const { deals } = this.props;
-    const dealsTableRows = deals.map(deal => <DealsTableRow key={deal.id} deal={deal} />);
-    return(
+    const dealsTableRows = deals.map(deal => (
+      <DealsTableRow onClick={this.deleteDeal} key={deal.id} deal={deal} />
+    ));
+    return (
       <div>
         <table className="DealsTable">
           <thead>
@@ -32,9 +45,7 @@ class DealsList extends Component {
               <th className="DealsTable--headerCell">Is Published?</th>
             </tr>
           </thead>
-          <tbody>
-            {dealsTableRows}
-          </tbody>
+          <tbody>{dealsTableRows}</tbody>
         </table>
       </div>
     );

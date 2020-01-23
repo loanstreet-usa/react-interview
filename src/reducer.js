@@ -1,4 +1,5 @@
 import { CREATE_DEAL } from './actions';
+import { DELETE_DEAL } from './actions';
 
 var nextDealId = 3;
 
@@ -17,15 +18,26 @@ const initialState = {
       dealSize: '5000000',
       dealType: 'Real Estate',
       isPublished: false,
-    }
-  ]
+    },
+  ],
 };
 
 export default (state = initialState, { type, payload }) => {
-  switch(type) {
+  switch (type) {
     case CREATE_DEAL:
-      return { ...state, deals: [ ...state.deals, { ...payload.deal, id: nextDealId++ } ] };
+      return {
+        ...state,
+        deals: [...state.deals, { ...payload.deal, id: nextDealId++ }],
+      };
+    case DELETE_DEAL:
+      const postDeleteDeals = state.deals.filter(
+        deal => deal.id !== payload.id
+      );
+      return {
+        ...state,
+        deals: [...postDeleteDeals],
+      };
     default:
       return state;
   }
-}
+};

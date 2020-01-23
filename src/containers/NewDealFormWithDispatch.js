@@ -4,7 +4,7 @@ import NewDealForm from '../components/NewDealForm';
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCreateDeal: deal => dispatch(createDeal(deal))
+    onCreateDeal: deal => dispatch(createDeal(deal)),
   };
 };
 
