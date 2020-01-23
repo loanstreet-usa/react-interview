@@ -21,17 +21,43 @@ class DealForm extends Component {
     onCreateDeal: noop
   }
 
+  errorMessages = [];
+
   // State represents a deal.
   state = { ...DEFAULT_DEAL };
 
   propertyUpdater(property) {
-    return e => this.setState({[property]: e.target.value});
+    return (e) => {
+      // TODO: check for input type
+      if (this.errorMessages.length) {
+        this.errorMessages = [];
+      }
+      return this.setState({[property]: e.target.value});
+    }
+  }
+
+  get hasAllValues() {
+    return !!(this.state.institution && this.state.dealType && this.state.dealSize)
   }
 
   createDeal = e => {
     e.preventDefault();
-    if (this.props.onCreateDeal)
+    if (this.props.onCreateDeal && this.hasAllValues) {
+      console.log('submitting')
       this.props.onCreateDeal({ ...this.state });
+    } else {
+      if (!this.state.institution) {
+        this.errorMessages.push('Institution is a required field')
+      }
+      if (!this.state.dealType) {
+        this.errorMessages.push('Deal type is a required field')
+      }
+      if (!this.state.dealType) {
+        this.errorMessages.push('Deal size is a required field')
+      }
+    }
+
+    console.log(this.errorMessages);
 
     // Reset state for the next deal input.
     this.setState({ ...DEFAULT_DEAL });
