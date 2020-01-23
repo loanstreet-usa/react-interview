@@ -36,7 +36,7 @@ class DealForm extends Component {
         this.errorMessages = [];
       }
       if (property === 'dealSize') {
-        console.log(typeof(+e.target.value));
+        console.log(typeof +e.target.value);
       }
       return this.setState({ [property]: e.target.value });
     };
@@ -66,7 +66,7 @@ class DealForm extends Component {
     e.preventDefault();
     this.validateData();
     this.showErrorMessages = true;
-    console.log(this.errorMessages, this.state.isPublished)
+    console.log(this.errorMessages, this.state.isPublished);
     if (this.props.onCreateDeal && !this.errorMessages.length) {
       this.props.onCreateDeal({ ...this.state });
     }
@@ -125,8 +125,9 @@ class DealForm extends Component {
           <div className="NewDealForm--errors-container">
             <span>We need some more info from you before we can submit:</span>
             <ul className="NewDealForm--errors-list">
-              <li>test</li>
-              <li>test</li>
+              {this.errorMessages.map((msg, index) => (
+                <li key={index}>{msg}</li>
+              ))}
             </ul>
           </div>
         ) : null}
