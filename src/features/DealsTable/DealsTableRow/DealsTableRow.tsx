@@ -11,20 +11,19 @@ type DealsTableRowProps = {
   deal: DealType;
 };
 
-const DealsTableRow = (props: DealsTableRowProps) => {
+export function DealsTableRow(props: DealsTableRowProps) {
   const {
     deal: { institution, dealType, dealSize, isPublished },
   } = props;
+
   return (
-    <tr className='DealsTableRow'>
-      <td className='DealsTableRow--cell'>{institution}</td>
-      <td className='DealsTableRow--cell'>{dealType}</td>
-      <td className='DealsTableRow--cell'>
+    <tr className="DealsTableRow">
+      <td className="DealsTableRow--cell">{institution}</td>
+      <td className="DealsTableRow--cell">{dealType}</td>
+      <td className="DealsTableRow--cell">
         {currencyAmountToString(dealSize)}
       </td>
-      <td className='DealsTableRow--cell'>{isPublished ? "Yes" : "No"}</td>
+      <td className="DealsTableRow--cell">{isPublished ? "Yes" : "No"}</td>
     </tr>
   );
-};
-
-export default DealsTableRow;
+}

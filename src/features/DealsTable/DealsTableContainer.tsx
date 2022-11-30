@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import DealsTable from "./DealsTable";
+import { DealsTable } from "./DealsTable";
 import { DealsListType } from "../../types";
 
 const mapStateToProps = (state: DealsListType) => {

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { createDeal } from "../../redux/actions";
-import NewDealForm from "./NewDealForm";
+import { DealForm as NewDealForm } from "./NewDealForm";
 import { DealType } from "../../types";
 
 type DispatchType = (arg0: {
