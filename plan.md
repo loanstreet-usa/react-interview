@@ -17,3 +17,13 @@
 - [ ] If not: implement remove and publish using Redux
 - [ ] Decide: shadcn, or another approach, for "pretty up the table styling"
 - [ ] Implement table styling accordingly
+
+## Work Done
+
+- [x] Installed @testing-library/dom, @testing-library/jest-dom, @testing-library/user-event (first two per CRA instructions, last as easier than using fireEvent)
+- [x] created src/setupTests.ts as method for avoiding boilerplate in every test file
+- [x] renamed `index.tests.tsx` to `index.test.tsx` due to improper CRA naming convention--jest/CRA look for .test, not .tests so .tests is failing to match patterns
+
+## Sources
+
+- https://create-react-app.dev/docs/running-tests/
