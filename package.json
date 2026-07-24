@@ -8,8 +8,8 @@
     "react-dom": "16.13.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
-    "sass": "1.83.1",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "sass": "1.83.1"
   },
   "scripts": {
     "build": "react-scripts build",
@@ -31,7 +31,10 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^10.2.1",
+    "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^25.2.3",
     "@types/lodash": "^4.14.155",
     "@types/react": "^16.9.35",

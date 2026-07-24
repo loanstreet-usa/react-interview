@@ -1,6 +1,6 @@
 # Attack Plan
 
-- [ ] Add `@testing-library/jest-dom` (matchers) and `@testing-library/user-event` (realistic interaction simulation); wire up `src/setupTests.ts`
+- [x] Add `@testing-library/jest-dom` (matchers) and `@testing-library/user-event` (realistic interaction simulation); wire up `src/setupTests.ts`
 - [ ] Create tests (acceptance-level: validation errors, remove, publish, sort)
   - Note: written before RJSF exists, so these are best guesses at error text/behavior. Expect to reconcile assertions with RJSF's actual output (AJV default messages, or whatever's overridden via `customValidate`/`uiSchema`) once step 4 lands — not a planning flaw, just the normal cost of tests-first.
   - Note: remove/publish tests written here are provisional. `src/tests/utils.tsx` currently wraps renders in a Redux `<Provider>`, so these will pass against that setup for now — but if TanStack Query is chosen at the decision point below, the wrapper becomes a `QueryClientProvider` and these tests likely need rewriting (different mocking strategy: MSW intercepting `fetch` vs. asserting against a Redux store). Sort/validation tests aren't affected by this since they don't touch the state-management layer.
