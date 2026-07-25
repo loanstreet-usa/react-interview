@@ -12,14 +12,14 @@ const DealsTable = (props: DealsTableProps) => {
   ));
   return (
     <div className="tile">
-      <div className="tile--header">Deal Portfolio</div>
-      <table className='DealsTable'>
+      <h2 className="tile--header">Deal Portfolio</h2>
+      <table className="DealsTable">
         <thead>
           <tr>
-            <th className='DealsTable--headerCell'>Institution</th>
-            <th className='DealsTable--headerCell'>Deal Type</th>
-            <th className='DealsTable--headerCell'>Deal Size</th>
-            <th className='DealsTable--headerCell'>Is Published?</th>
+            <th className="DealsTable--headerCell">Institution</th>
+            <th className="DealsTable--headerCell">Deal Type</th>
+            <th className="DealsTable--headerCell">Deal Size</th>
+            <th className="DealsTable--headerCell">Is Published?</th>
           </tr>
         </thead>
         <tbody>{dealsTableRows}</tbody>

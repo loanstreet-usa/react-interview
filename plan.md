@@ -23,6 +23,7 @@
 - [x] Installed @testing-library/dom, @testing-library/jest-dom, @testing-library/user-event (first two per CRA instructions, last as easier than using fireEvent)
 - [x] created src/setupTests.ts as method for avoiding boilerplate in every test file
 - [x] renamed `index.tests.tsx` to `index.test.tsx` due to improper CRA naming convention--jest/CRA look for .test, not .tests so .tests is failing to match patterns
+- [x] changed `<div class='tile--header'>` to be `<h2>` instead, for accessibility and testing
 
 ## Sources
 
