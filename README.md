@@ -33,6 +33,8 @@ If you have time left over, feel free to attempt any of the challenges below tha
 
 - Write tests for any of the requirements that you implement.
 
+  - _Note:_ if you reach for [MSW](https://mswjs.io/) to mock API calls in your tests, pin it to `msw@1.x` (`yarn add -D msw@1`). This project's `react-scripts@3.4.1`/Jest 24 toolchain predates support for ES-module-only packages, and MSW v2+ depends on one (`rettime`) internally — installing the latest MSW today will fail with `Class extends value undefined is not a constructor or null` when your test suite runs. v1 has no such dependency and works cleanly here.
+
 - Pretty up the table styling
 
 ## Delivery
